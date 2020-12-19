@@ -26,7 +26,7 @@ namespace EMPRESA.Models
         [Display(Name = "Categoría")]
         public string Categoria { get; set; }
 
-        [Display(Name = "URL de la imagen")]
+        [Display(Name = "Imagen")]
         public string UrlImagen { get; set; }
     }
 }
