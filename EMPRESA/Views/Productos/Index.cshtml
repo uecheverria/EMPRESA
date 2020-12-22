@@ -6,61 +6,67 @@
 }
 
 <h1>Productos</h1>
-
-<p>
-    <a asp-action="Create">Añadir producto</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NomProducto)
-            </th>
-            <th width="60%">
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Precio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UrlImagen)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomProducto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Precio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Categoria)
-            </td>
-            <td>
-                @{ 
-                    if (item.UrlImagen != null)
-                    {
-                        <img src='@Html.DisplayFor(modelItem => item.UrlImagen)' style="max-width: 100px;"> 
-                    }
-                }
-            </td>
-
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Detalles</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Eliminar</a>
-            </td>
-        </tr>
+@if (User.Identity.Name != null) //lo suyo sería configurar roles y mostrar u ocultar en base a eso. Aqui solo comprobamos si hay alguien logeado
+{
+    <p>
+        <a asp-action="Create">Añadir producto</a>
+    </p>
 }
-    </tbody>
-</table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NomProducto)
+                </th>
+                <th width="60%">
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Precio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Categoria)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UrlImagen)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomProducto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Precio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Categoria)
+                    </td>
+                    <td>
+                        @{
+                            if (item.UrlImagen != null)
+                            {
+                                <img src='@Html.DisplayFor(modelItem => item.UrlImagen)' style="max-width: 100px;">
+                            }
+                        }
+                    </td>
+
+                    @if (User.Identity.Name != null) //lo suyo sería configurar roles y mostrar u ocultar en base a eso. Aqui solo comprobamos si hay alguien logeado
+                    {
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ID">Editar</a> |
+                            <a asp-action="Details" asp-route-id="@item.ID">Detalles</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ID">Eliminar</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>

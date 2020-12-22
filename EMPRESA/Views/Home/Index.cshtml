@@ -42,19 +42,29 @@
 </div>
 <hr />
 <div class="row">
+    <div class="col-12">
+        <center><h1>Productos destacados</h1></center>
+    </div>
     @{
         foreach (var item in Model)
         {
-            <div class="col-3">
-                <div class="card">
-                    <img class="card-img-top" src="@item.UrlImagen" alt="@{@item.NomProducto} ">
-                    <div class="card-body">
-                        <h5 class="card-title">@{@item.NomProducto}</h5>
-                        <p class="card-text">@{@item.Descripcion}</p>
-                        <a href="#" class="btn btn-primary">Comprar</a>
-                    </div>
+        <div class="col-3 d-flex align-items-stretch margenBot">
+            <div class="card">
+                <img class="card-img-top" src="@item.UrlImagen" alt="@{@item.NomProducto} ">
+                <div class="card-body">
+                    <h5 class="card-title">@{@item.NomProducto}</h5>
+                    <p class="card-text">@{@item.Descripcion}</p>
+                        
+                </div>
+                <div class="card-footer bg-transparent">
+                    <div class="row">
+                        <div class="col-9"><b>Precio: @{@item.Precio} €</b></div>
+                        <div class="col-3"><a class="btn btn-primary" href="#">Comprar</a></div>
+                    </div>  
                 </div>
             </div>
+            
+        </div>
         }
     }
 </div>
