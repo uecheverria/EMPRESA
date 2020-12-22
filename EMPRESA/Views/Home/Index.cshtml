@@ -4,40 +4,62 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="row">
-    <div class="col-12">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-           
-            <ol class="carousel-indicators">
-                @{ 
-                    foreach (var item in Model)
-                    {
-                        <li data-target="#carouselExampleIndicators" data-slide-to="@{@item.ID} " @if (item==Model.First()) { <text> class="active" </text> }></li>
-                    }
-                }
-            </ol>
-            <div class="carousel-inner">
-                @{ 
-                    foreach (var item in Model)
-                    {
-                        <div class="carousel-item @if (item==Model.First()) {<text>active</text>}">
-                            <img style="min-height:200px;" src="@Html.DisplayFor(modelItem => item.UrlImagen)" class="d-block w-100" alt=" @Html.DisplayFor(modelItem => item.NomProducto)">
-                        </div>
-                    }
-                }
+<div id="carouselExampleIndicators" class="carousel slide w-100" data-ride="carousel">
+    <ol class="carousel-indicators">
+        @for (int i = 1; i <= 4; i++)
+        {
+            <li data-target="#carouselExampleIndicators" data-slide-to="@{@i}" @if (@i == 1) { <text> class="active" </text> }></li>
+        }
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/img/1.jpg" class="d-block w-100" alt="">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 class="sliderText">@ViewData["img_title"]</h5>
+                <p class="sliderText">@ViewData["img1_text"]</p>
             </div>
-
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
         </div>
+        @for (int j = 2; j <= 4; j++)
+        {
+            <div class="carousel-item">
+                <img src="~/img/@{@j}.jpg" class="d-block w-100" alt="">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 class="sliderText">@ViewData["img_title"]</h5>
+                    <p class="sliderText">@ViewData["img" + @j + "_text"]</p>
+                </div>
+            </div>
+        }
     </div>
+
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Anterior</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Siguiente</span>
+    </a>
 </div>
+<hr />
+<div class="row">
+    @{
+        foreach (var item in Model)
+        {
+            <div class="col-3">
+                <div class="card">
+                    <img class="card-img-top" src="@item.UrlImagen" alt="@{@item.NomProducto} ">
+                    <div class="card-body">
+                        <h5 class="card-title">@{@item.NomProducto}</h5>
+                        <p class="card-text">@{@item.Descripcion}</p>
+                        <a href="#" class="btn btn-primary">Comprar</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+
 
 
 
